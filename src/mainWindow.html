@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Sheet Music</title>
+		<link href="../css/stylesheet.css" rel="stylesheet" />
+
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+		/>
+	</head>
+	<body>
+		<nav>
+			<div class="navwrapper">
+				<a class="brand-logo center">Sheet Music</a>
+			</div>
+		</nav>
+		<div>
+			<input
+				type="text"
+				id="search"
+				onkeyup="searchTable()"
+				placeholder="Type to Search"
+			/>
+		</div>
+
+		<div id="scrolltable">
+			<table id="mainTable">
+				<thead>
+					<tr>
+						<th class="table-header" onclick="sortTable(0)">Composer</th>
+						<th class="table-header" onclick="sortTable(1)">Title</th>
+						<th class="table-header" onclick="sortTable(2)">Year</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+
+		<div id="add-btn">
+			<a
+				class="btn-floating waves-effect waves-light "
+				onclick="openAddWindow()"
+			>
+				<i class="material-icons">add</i>
+			</a>
+		</div>
+
+		<div id="edit-btn">
+			<a class="btn-floating waves-effect waves-light " onclick="">
+				<i class="material-icons">edit</i>
+			</a>
+		</div>
+
+		<script src="mainWindow.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	</body>
+</html>

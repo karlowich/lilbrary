@@ -1,0 +1,61 @@
+/* make table scrollable */
+#scrolltable {
+	margin-top: 20px;
+	height: 400px;
+	overflow: auto;
+}
+
+#search {
+	margin-left: 1%;
+	margin-right: 0;
+	padding-left: 10px;
+	padding-right: 0;
+	width: 96.5%;
+}
+
+#add-btn {
+	position: fixed;
+	right: 23px;
+	bottom: 23px;
+	padding-top: 15px;
+	margin-bottom: 0;
+	z-index: 997;
+}
+
+#edit-btn {
+	position: fixed;
+	right: 23px;
+	bottom: 73px;
+	padding-top: 15px;
+	margin-bottom: 0;
+	z-index: 997;
+}
+
+.selected {
+	background-color: brown;
+	color: #fff;
+}
+
+/* Add slide on hover */
+.table-header {
+	text-decoration: none;
+}
+/* add a empty string after the elment with class .slide-center-out  */
+.table-header:after {
+	content: '';
+	display: block;
+	height: 3px;
+	width: 0;
+	background: transparent;
+	transition: width 0.5s ease, background-color 0.5s ease;
+	-webkit-transition: width 0.5s ease, background-color 0.5s ease;
+	-moz-transition: width 0.5s ease, background-color 0.5s ease;
+
+	margin: auto; /* center the cotent so it will sliding from the midddle to the left and right */
+}
+
+/* Change the width and background on hover, aka sliding from the middle to the left and right */
+.table-header:hover:after {
+	width: 100%;
+	background: rgba(0, 0, 0, 0.87);
+}
