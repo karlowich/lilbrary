@@ -33,6 +33,10 @@ function openAddWindow() {
 	ipcRenderer.send('addWindow:open');
 }
 
+function openEditWindow() {
+	ipcRenderer.send('editWindow:open');
+}
+
 //from w3school
 function sortTable(n) {
 	let table, rows, switching, i, x, y, shouldSwitch, dir;
@@ -43,7 +47,7 @@ function sortTable(n) {
 	dir = 'asc';
 	/* Make a loop that will continue until
   no switching has been done: */
-	while (switching == true) {
+	while (switching) {
 		// Start by saying: no switching is done:
 		switching = false;
 		rows = table.rows;
@@ -72,7 +76,7 @@ function sortTable(n) {
 				}
 			}
 		}
-		if (shouldSwitch == true) {
+		if (shouldSwitch) {
 			/* If a switch has been marked, make the switch
       and mark that a switch has been done: */
 			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
@@ -114,4 +118,16 @@ function searchTable() {
 			}
 		}
 	}
+}
+
+var table = document.getElementById('mainTable');
+let selected = table.getElementsByClassName('selected');
+tbody.onclick = highlight;
+
+function highlight(e) {
+	if (selected[0]) {
+		selected[0].className = '';
+	}
+
+	e.target.parentNode.className = 'selected';
 }

@@ -96,6 +96,10 @@ ipcMain.on('addWindow:open', function(e) {
 	createAddWindow();
 });
 
+ipcMain.on('editWindow:open', function(e) {
+	createEditWindow();
+});
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
