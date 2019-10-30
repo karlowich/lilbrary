@@ -1,6 +1,6 @@
 /* make table scrollable */
 #scrolltable {
-	margin-top: 20px;
+	margin-top: 10px;
 	height: 400px;
 	overflow: auto;
 }

@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	ipcRenderer.send('table:load');
 });
 
-// Update items
+// Update table
+
 ipcRenderer.on('table:update', function(e, item) {
 	const tr = document.createElement('tr');
 	const composer = document.createElement('td');
