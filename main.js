@@ -10,6 +10,7 @@ process.env.NODE_ENV = 'dev';
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 let addWindow;
+let editWindow;
 
 function createMainWindow() {
 	// Create the browser window.
@@ -56,7 +57,8 @@ function createAddWindow() {
 	});
 }
 
-function createEditWindow() {
+// Handle create edit window
+function createEditWindow(item) {
 	// Create new window
 	editWindow = new BrowserWindow({
 		webPreferences: {
@@ -68,6 +70,11 @@ function createEditWindow() {
 	});
 	// Load html into window¨
 	editWindow.loadFile('src/editWindow.html');
+
+	// Send data to form
+	editWindow.webContents.on('dom-ready', () => {
+		editWindow.webContents.send('item:edit', item);
+	});
 
 	// Garbage collection handle
 	editWindow.on('closed', function() {
@@ -96,8 +103,9 @@ ipcMain.on('addWindow:open', function(e) {
 	createAddWindow();
 });
 
-ipcMain.on('editWindow:open', function(e) {
-	createEditWindow();
+ipcMain.on('editWindow:open', function(e, tag) {
+	let item = store.get(tag);
+	createEditWindow(item);
 });
 
 // This method will be called when Electron has finished

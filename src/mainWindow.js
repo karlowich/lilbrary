@@ -14,6 +14,9 @@ ipcRenderer.on('table:update', function(e, item) {
 	const composer = document.createElement('td');
 	const title = document.createElement('td');
 	const year = document.createElement('td');
+	composer.className = 'composer';
+	title.className = 'title';
+	year.className = 'year';
 	composer.append(item.composer);
 	title.append(item.title);
 	year.append(item.year);
@@ -34,7 +37,11 @@ function openAddWindow() {
 }
 
 function openEditWindow() {
-	ipcRenderer.send('editWindow:open');
+	let row = document.querySelector('.selected');
+	let tag = `${row.querySelector('.composer').innerHTML} ${
+		row.querySelector('.title').innerHTML
+	}`;
+	ipcRenderer.send('editWindow:open', tag);
 }
 
 //from w3school
@@ -120,14 +127,21 @@ function searchTable() {
 	}
 }
 
-var table = document.getElementById('mainTable');
-let selected = table.getElementsByClassName('selected');
-tbody.onclick = highlight;
+// highlight selected row
+let selected = document.getElementsByClassName('selected');
+tbody.onclick = rowSelect;
+tbody.ondblclick = rowDeSelect;
 
-function highlight(e) {
+function rowSelect(e) {
 	if (selected[0]) {
 		selected[0].className = '';
 	}
 
 	e.target.parentNode.className = 'selected';
+}
+
+function rowDeSelect() {
+	if (selected[0]) {
+		selected[0].className = '';
+	}
 }
