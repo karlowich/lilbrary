@@ -1,7 +1,7 @@
 const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 const Store = require('electron-store');
 //set filename and file path
-const store = new Store({ name: 'data', cwd: `${app.getAppPath()}/data` });
+const store = new Store({ name: 'data' });
 
 // SET ENV
 process.env.NODE_ENV = 'dev';
