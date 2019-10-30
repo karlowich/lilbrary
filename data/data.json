@@ -1,5 +1,17 @@
 {
-	"tags": "Weinberg Concertino, Takacs Acht Stucke, Takacs  Sonata, Mozart Concerto, Mozart Sonata, Weinberg Sonatina, Bach  Concerto, Stravinsky Pulcinella, Stravinsky Duo Concertant, Bach Sechs Sonaten und Partiten",
+	"tags": [
+		"Takacs Acht Stucke",
+		"Weinberg Concertino",
+		"Takacs  Sonata",
+		"Mozart Concerto",
+		"Mozart Sonata",
+		"Weinberg Sonatina",
+		"Stravinsky Pulcinella",
+		"Stravinsky Duo Concertant",
+		"Bach Sechs Sonaten und Partiten",
+		"Bach  Concerto in Am",
+		"Dvorak Sonatina"
+	],
 	"Takacs Acht Stucke": {
 		"composer": "Takacs",
 		"tag": "Takacs Acht Stucke",
@@ -36,12 +48,6 @@
 		"title": "Sonatina",
 		"year": "1950"
 	},
-	"Bach  Concerto": {
-		"composer": "Bach ",
-		"tag": "Bach  Concerto",
-		"title": "Concerto",
-		"year": "1740"
-	},
 	"Stravinsky Pulcinella": {
 		"composer": "Stravinsky",
 		"tag": "Stravinsky Pulcinella",
@@ -59,5 +65,17 @@
 		"tag": "Bach Sechs Sonaten und Partiten",
 		"title": "Sechs Sonaten und Partiten",
 		"year": "1720"
+	},
+	"Bach  Concerto in Am": {
+		"composer": "Bach ",
+		"tag": "Bach  Concerto in Am",
+		"title": "Concerto in Am",
+		"year": "1740"
+	},
+	"Dvorak Sonatina": {
+		"composer": "Dvorak",
+		"tag": "Dvorak Sonatina",
+		"title": "Sonatina",
+		"year": "1860"
 	}
 }

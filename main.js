@@ -84,7 +84,10 @@ function createEditWindow(item) {
 
 // Catch item:add and store in /data/data.json
 ipcMain.on('item:add', function(e, item) {
-	let itemTags = `${store.get('tags')}, ${item.tag}`;
+	let itemTags = store.get('tags');
+	console.log(itemTags);
+	itemTags.push(item.tag);
+	console.log(itemTags);
 	//store item data
 	store.set(item.tag, item);
 	//store item tag
@@ -93,6 +96,18 @@ ipcMain.on('item:add', function(e, item) {
 	updateTable();
 
 	addWindow.close();
+});
+
+ipcMain.on('item:edit', function(e, item) {
+	let itemTags = `${store.get('tags')}, ${item.tag}`;
+	//store item data
+	store.set(item.tag, item);
+	//store item tag
+	store.set('tags', itemTags);
+
+	updateTable();
+
+	editWindow.close();
 });
 
 ipcMain.on('table:load', function(e) {
@@ -197,11 +212,10 @@ function updateTable() {
 
 	// Get item tags
 	const tags = store.get('tags');
-	const itemTags = tags.split(', ');
 
 	// Update table for each tag
-	for (let i = 0; i < itemTags.length; i++) {
-		item = store.get(itemTags[i]);
+	for (let i = 0; i < tags.length; i++) {
+		item = store.get(tags[i]);
 		mainWindow.webContents.send('table:update', item);
 	}
 }
