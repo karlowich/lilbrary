@@ -85,9 +85,7 @@ function createEditWindow(item) {
 // Catch item:add and store in /data/data.json
 ipcMain.on('item:add', function(e, item) {
 	let itemTags = store.get('tags');
-	console.log(itemTags);
 	itemTags.push(item.tag);
-	console.log(itemTags);
 	//store item data
 	store.set(item.tag, item);
 	//store item tag
@@ -99,7 +97,8 @@ ipcMain.on('item:add', function(e, item) {
 });
 
 ipcMain.on('item:edit', function(e, item) {
-	let itemTags = `${store.get('tags')}, ${item.tag}`;
+	let itemTags = store.get('tags');
+	itemTags.push(item.tag);
 	//store item data
 	store.set(item.tag, item);
 	//store item tag
@@ -121,6 +120,7 @@ ipcMain.on('addWindow:open', function(e) {
 ipcMain.on('editWindow:open', function(e, tag) {
 	let item = store.get(tag);
 	createEditWindow(item);
+	deleteItem(tag);
 });
 
 // This method will be called when Electron has finished
@@ -149,20 +149,6 @@ const mainMenuTemplate = [
 	{
 		label: 'Menu',
 		submenu: [
-			{
-				label: 'Add Item',
-				click() {
-					createAddWindow();
-				}
-			},
-			{
-				label: 'Edit Item',
-				click() {}
-			},
-			{
-				label: 'Delete Item',
-				click() {}
-			},
 			{
 				label: 'Update Items',
 				click() {
@@ -218,4 +204,14 @@ function updateTable() {
 		item = store.get(tags[i]);
 		mainWindow.webContents.send('table:update', item);
 	}
+}
+
+function deleteItem(tag) {
+	let itemTags = store.get('tags');
+	let index = itemTags.indexOf(tag);
+	if (index > -1) {
+		itemTags.splice(index, 1);
+	}
+	store.set('tags', itemTags);
+	store.delete(tag);
 }
