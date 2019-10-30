@@ -26,3 +26,7 @@ function submitForm(e) {
 function formValue(id) {
 	return document.querySelector(id).value;
 }
+
+function closeEditWindow() {
+	ipcRenderer.send('editWindow:close');
+}

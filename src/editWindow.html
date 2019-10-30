@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<title>Edit Item</title>
+		<link rel="stylesheet" href="../css/stylesheet.css" />
 		<link
 			href="https://fonts.googleapis.com/icon?family=Material+Icons"
 			rel="stylesheet"
@@ -27,8 +28,15 @@
 					<input type="text" id="year" placeholder="" required />
 				</div>
 				<button class="btn waves-effect waves-light" type="submit">
-					Add Item
+					<i class="large material-icons">add</i>
 				</button>
+				<a
+					id="delete-btn"
+					class="btn waves-effect waves-light red"
+					onclick="closeEditWindow()"
+				>
+					<i class="material-icons">delete</i>
+				</a>
 			</form>
 		</div>
 		<script src="editWindow.js"></script>

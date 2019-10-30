@@ -8,9 +8,8 @@
 		"Weinberg Sonatina",
 		"Stravinsky Pulcinella",
 		"Stravinsky Duo Concertant",
-		"Bach Sechs Sonaten und Partiten",
-		"Bach  Concerto in Am",
-		"Dvorak Sonatina"
+		"Dvorak Sonatina",
+		"Schubert Sonatina"
 	],
 	"Takacs Acht Stucke": {
 		"composer": "Takacs",
@@ -60,22 +59,16 @@
 		"title": "Duo Concertant",
 		"year": "1930"
 	},
-	"Bach Sechs Sonaten und Partiten": {
-		"composer": "Bach",
-		"tag": "Bach Sechs Sonaten und Partiten",
-		"title": "Sechs Sonaten und Partiten",
-		"year": "1720"
-	},
-	"Bach  Concerto in Am": {
-		"composer": "Bach ",
-		"tag": "Bach  Concerto in Am",
-		"title": "Concerto in Am",
-		"year": "1740"
-	},
 	"Dvorak Sonatina": {
 		"composer": "Dvorak",
 		"tag": "Dvorak Sonatina",
 		"title": "Sonatina",
 		"year": "1870"
+	},
+	"Schubert Sonatina": {
+		"composer": "Schubert",
+		"tag": "Schubert Sonatina",
+		"title": "Sonatina",
+		"year": "1820"
 	}
 }
