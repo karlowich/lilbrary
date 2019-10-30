@@ -85,7 +85,11 @@ function createEditWindow(item) {
 // Catch item:add and store in /data/data.json
 ipcMain.on('item:add', function(e, item) {
 	let itemTags = store.get('tags');
-	itemTags.push(item.tag);
+	if (itemTags != null) {
+		itemTags.push(item.tag);
+	} else {
+		itemTags = [item.tag];
+	}
 	//store item data
 	store.set(item.tag, item);
 	//store item tag
@@ -110,7 +114,9 @@ ipcMain.on('item:edit', function(e, item) {
 });
 
 ipcMain.on('table:load', function(e) {
-	updateTable();
+	if (store.get('tags') != null) {
+		updateTable();
+	}
 });
 
 ipcMain.on('addWindow:open', function(e) {
