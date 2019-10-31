@@ -2,16 +2,34 @@ const electron = require('electron');
 const { ipcRenderer } = electron;
 
 const tbody = document.querySelector('tbody');
+const thead = document.querySelector('thead');
+const columns = ['composer', 'title', 'year'];
 
 document.addEventListener('DOMContentLoaded', function() {
 	// load data
 	ipcRenderer.send('table:load');
+
+	//load table headers
+	const tr = document.createElement('tr');
+	for (let i = 0; i < columns.length; i++) {
+		tr.appendChild(createTh(columns[i], i));
+	}
+	thead.append(tr);
 });
+
+function createTh(column, index) {
+	this[column] = document.createElement('th');
+	this[column].className = 'table-header';
+	// add sort function to each header
+	this[column].setAttribute('onclick', `sortTable(${index})`);
+	// make sure first letter is capital
+	this[column].append(column.charAt(0).toUpperCase() + column.slice(1));
+	return this[column];
+}
 
 // Update table
 ipcRenderer.on('table:update', function(e, item) {
 	const tr = document.createElement('tr');
-	const columns = ['composer', 'title', 'year'];
 	for (let i = 0; i < columns.length; i++) {
 		tr.appendChild(createTd(columns[i], item));
 	}
