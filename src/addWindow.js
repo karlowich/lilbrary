@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		} else {
 			div.appendChild(createInput(columns[i], false));
 		}
+
 		inputs.append(div);
 	}
 });

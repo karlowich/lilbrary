@@ -6,8 +6,7 @@ const store = new Store({ name: 'data' });
 // SET ENV
 process.env.NODE_ENV = 'dev';
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
+// Keep a global reference of the window object
 let mainWindow;
 let addWindow;
 let editWindow;
@@ -27,9 +26,6 @@ function createMainWindow() {
 
 	// Emitted when the window is closed.
 	mainWindow.on('closed', () => {
-		// Dereference the window object, usually you would store windows
-		// in an array if your app supports multi windows, this is the time
-		// when you should delete the corresponding element.
 		mainWindow = null;
 	});
 
@@ -48,7 +44,7 @@ function createAddWindow() {
 		height: 400,
 		title: 'Add Item'
 	});
-	// Load html into window¨
+	// Load html into window
 	addWindow.loadFile('src/addWindow.html');
 
 	// Garbage collection handle
@@ -68,7 +64,7 @@ function createEditWindow(item) {
 		height: 400,
 		title: 'Edit Item'
 	});
-	// Load html into window¨
+	// Load html into window
 	editWindow.loadFile('src/editWindow.html');
 
 	// Send data to form
@@ -139,15 +135,10 @@ ipcMain.on('editWindow:close', function(e) {
 	editWindow.close();
 });
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on('ready', createMainWindow);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
-	// On macOS it is common for applications and their menu bar
-	// to stay active until the user quits explicitly with Cmd + Q
 	if (process.platform !== 'darwin') {
 		app.quit();
 	}
@@ -174,7 +165,7 @@ const mainMenuTemplate = [
 			{ type: 'separator' },
 			{
 				label: 'Quit',
-				// Tjekker om det er mac eller pc og tilføjer keyboard shortcut
+				// Checks if mac and adds keyboard command accordingly
 				accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
 				click() {
 					app.quit();
