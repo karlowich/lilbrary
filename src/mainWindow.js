@@ -9,24 +9,22 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Update table
-
 ipcRenderer.on('table:update', function(e, item) {
 	const tr = document.createElement('tr');
-	const composer = document.createElement('td');
-	const title = document.createElement('td');
-	const year = document.createElement('td');
-	composer.className = 'composer';
-	title.className = 'title';
-	year.className = 'year';
-	composer.append(item.composer);
-	title.append(item.title);
-	year.append(item.year);
-	tr.appendChild(composer);
-	tr.appendChild(title);
-	tr.appendChild(year);
+	const columns = ['composer', 'title', 'year'];
+	for (let i = 0; i < columns.length; i++) {
+		tr.appendChild(createTd(columns[i], item));
+	}
 	tbody.append(tr);
 	sortTable(0);
 });
+
+function createTd(column, item) {
+	this[column] = document.createElement('td');
+	this[column].className = column;
+	this[column].append(item[column]);
+	return this[column];
+}
 
 ipcRenderer.on('table:clear', function() {
 	//clear tbody
