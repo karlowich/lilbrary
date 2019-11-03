@@ -46,15 +46,12 @@ function createInput(column, autofocus) {
 function submitForm(e) {
 	e.preventDefault();
 	const item = {
-		composer: formValue('#composer'),
-		tag: `${formValue('#composer')} ${formValue('#title')}`,
-		title: formValue('#title'),
-		year: formValue('#year')
+		tag: `${document.querySelector(`#${columns[0]}`).value} ${
+			document.querySelector(`#${columns[1]}`).value
+		}`
 	};
-
+	for (let i = 0; i < columns.length; i++) {
+		item[columns[i]] = document.querySelector(`#${columns[i]}`).value;
+	}
 	ipcRenderer.send('item:add', item);
-}
-
-function formValue(id) {
-	return document.querySelector(id).value;
 }
