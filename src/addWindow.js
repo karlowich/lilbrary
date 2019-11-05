@@ -4,11 +4,11 @@ const { ipcRenderer } = electron;
 const form = document.querySelector('form');
 form.addEventListener('submit', submitForm);
 
-const columns = ['composer', 'title', 'year'];
+const columns = ['composer', 'title', 'year', 'opus', 'difficulty'];
 
 //Load form
 document.addEventListener('DOMContentLoaded', function() {
-	let inputs = document.querySelector('#inputs');
+	const inputs = document.querySelector('#inputs');
 	for (let i = 0; i < columns.length; i++) {
 		const div = document.createElement('div');
 		div.className = 'input-field';

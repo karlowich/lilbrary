@@ -1,0 +1,50 @@
+<html lang="en">
+	<head>
+		<title>New Library</title>
+
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+		/>
+		<link rel="stylesheet" href="../css/stylesheet.css" />
+	</head>
+	<body>
+		<div class="container">
+			<form>
+				<div id="inputs">
+					<div class="input-field">
+						<label for="library title" class="active">
+							Library Title
+						</label>
+						<input type="text" required autofocus />
+					</div>
+					<h6>Columns</h6>
+					<hr />
+				</div>
+
+				<a class="btn waves-effect waves-light" onclick="createColumnInput()">
+					<i class="large material-icons">add</i>
+				</a>
+				<a
+					class="btn waves-effect waves-light red"
+					onclick="removeColumnInput()"
+				>
+					<i class="large material-icons">remove</i>
+				</a>
+				<button
+					id="save-btn"
+					class="btn waves-effect waves-light"
+					type="submit"
+				>
+					<i class="large material-icons">save</i>
+				</button>
+			</form>
+		</div>
+		<script src="newLibraryWindow.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	</body>
+</html>

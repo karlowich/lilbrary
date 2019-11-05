@@ -4,7 +4,7 @@ const { ipcRenderer } = electron;
 const form = document.querySelector('form');
 form.addEventListener('submit', submitForm);
 
-const columns = ['composer', 'title', 'year'];
+const columns = ['composer', 'title', 'year', 'opus', 'difficulty'];
 
 //Load form
 document.addEventListener('DOMContentLoaded', function() {

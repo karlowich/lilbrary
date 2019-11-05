@@ -14,8 +14,8 @@ let editWindow;
 function createMainWindow() {
 	// Create the browser window.
 	mainWindow = new BrowserWindow({
-		width: 800,
-		height: 600,
+		width: 1000,
+		height: 700,
 		webPreferences: {
 			nodeIntegration: true
 		}
@@ -75,6 +75,26 @@ function createEditWindow(item) {
 	// Garbage collection handle
 	editWindow.on('closed', function() {
 		editWindow = null;
+	});
+}
+
+// Handle create new library window
+function createNewLibraryWindow() {
+	// Create new window
+	newLibraryWindow = new BrowserWindow({
+		webPreferences: {
+			nodeIntegration: true
+		},
+		width: 500,
+		height: 400,
+		title: 'New Library'
+	});
+	// Load html into window
+	newLibraryWindow.loadFile('src/newLibraryWindow.html');
+
+	// Garbage collection handle
+	newLibraryWindow.on('closed', function() {
+		newLibraryWindow = null;
 	});
 }
 
@@ -156,6 +176,12 @@ const mainMenuTemplate = [
 	{
 		label: 'Menu',
 		submenu: [
+			{
+				label: 'New Library',
+				click() {
+					createNewLibraryWindow();
+				}
+			},
 			{
 				label: 'Update Items',
 				click() {

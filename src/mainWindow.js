@@ -3,7 +3,7 @@ const { ipcRenderer } = electron;
 
 const tbody = document.querySelector('tbody');
 const thead = document.querySelector('thead');
-const columns = ['composer', 'title', 'year'];
+const columns = ['composer', 'title', 'year', 'opus', 'difficulty'];
 
 document.addEventListener('DOMContentLoaded', function() {
 	// load data
