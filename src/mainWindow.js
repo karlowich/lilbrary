@@ -1,20 +1,33 @@
 const electron = require('electron');
+const Store = require('electron-store');
+//set filename
+const store = new Store({ name: 'data' });
+
 const { ipcRenderer } = electron;
 
 const tbody = document.querySelector('tbody');
 const thead = document.querySelector('thead');
-const columns = ['composer', 'title', 'year', 'opus', 'difficulty'];
+
+let libraryColumns = [];
 
 document.addEventListener('DOMContentLoaded', function() {
+	//load library
+	if (store.get('library') != null) {
+		let library = store.get('library');
+		libraryColumns = library.columns;
+		let libraryTitle = library.title;
+		document.querySelector('#library-title').innerHTML = libraryTitle;
+
+		//load table headers
+		const tr = document.createElement('tr');
+		for (let i = 0; i < libraryColumns.length; i++) {
+			tr.appendChild(createTh(libraryColumns[i], i));
+		}
+		thead.append(tr);
+	}
+
 	// load data
 	ipcRenderer.send('table:load');
-
-	//load table headers
-	const tr = document.createElement('tr');
-	for (let i = 0; i < columns.length; i++) {
-		tr.appendChild(createTh(columns[i], i));
-	}
-	thead.append(tr);
 });
 
 function createTh(column, index) {
@@ -30,8 +43,8 @@ function createTh(column, index) {
 // Update table
 ipcRenderer.on('table:update', function(e, item) {
 	const tr = document.createElement('tr');
-	for (let i = 0; i < columns.length; i++) {
-		tr.appendChild(createTd(columns[i], item));
+	for (let i = 0; i < libraryColumns.length; i++) {
+		tr.appendChild(createTd(libraryColumns[i], item));
 	}
 	tbody.append(tr);
 	sortTable(0);
@@ -55,8 +68,8 @@ function openAddWindow() {
 
 function openEditWindow() {
 	let row = document.querySelector('.selected');
-	let tag = `${row.querySelector('.composer').innerHTML} ${
-		row.querySelector('.title').innerHTML
+	let tag = `${row.querySelector(`.${libraryColumns[0]}`).innerHTML} ${
+		row.querySelector(`.${libraryColumns[1]}`).innerHTML
 	}`;
 	ipcRenderer.send('editWindow:open', tag);
 }

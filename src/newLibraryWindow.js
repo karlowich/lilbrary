@@ -24,15 +24,23 @@ function removeColumnInput() {
 	numberOfColumns--;
 }
 
-function submitForm(e) {
-	e.preventDefault();
-	ipcRenderer.send('', item);
-}
-
 function createInput(column) {
 	this[column] = document.createElement('input');
 	this[column].id = column;
 	this[column].type = 'text';
 	this[column].required = true;
 	return this[column];
+}
+
+function submitForm(e) {
+	e.preventDefault();
+	const item = {
+		title: document.querySelector(`#library-title`).value,
+		columns: []
+	};
+	for (let i = 1; i <= numberOfColumns; i++) {
+		item.columns.push(document.querySelector(`#column${i}`).value);
+	}
+
+	ipcRenderer.send('library:new', item);
 }

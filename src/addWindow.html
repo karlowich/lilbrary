@@ -10,15 +10,23 @@
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
 		/>
+		<link rel="stylesheet" href="../css/stylesheet.css" />
 	</head>
 	<body>
 		<div class="container">
+			<h5>Add Item</h5>
 			<form>
 				<div id="inputs"></div>
 
 				<button class="btn waves-effect waves-light" type="submit">
 					<i class="large material-icons">add</i>
 				</button>
+				<a
+					class="btn waves-effect waves-light red right-btn"
+					onclick="closeAddWindow()"
+				>
+					<i class="large material-icons">close</i>
+				</a>
 			</form>
 		</div>
 		<script src="addWindow.js"></script>

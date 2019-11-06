@@ -1,6 +1,6 @@
 const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 const Store = require('electron-store');
-//set filename and file path
+//set filename
 const store = new Store({ name: 'data' });
 
 // SET ENV
@@ -10,12 +10,14 @@ process.env.NODE_ENV = 'dev';
 let mainWindow;
 let addWindow;
 let editWindow;
+let newLibraryWindow;
 
 function createMainWindow() {
 	// Create the browser window.
 	mainWindow = new BrowserWindow({
 		width: 1000,
 		height: 700,
+		backgroundColor: '#fff',
 		webPreferences: {
 			nodeIntegration: true
 		}
@@ -24,6 +26,9 @@ function createMainWindow() {
 	// and load the index.html of the app.
 	mainWindow.loadFile('src/mainWindow.html');
 
+	mainWindow.once('ready-to-show', () => {
+		mainWindow.show();
+	});
 	// Emitted when the window is closed.
 	mainWindow.on('closed', () => {
 		mainWindow = null;
@@ -40,12 +45,18 @@ function createAddWindow() {
 		webPreferences: {
 			nodeIntegration: true
 		},
+		backgroundColor: '#fff',
+		frame: false,
 		width: 500,
 		height: 400,
 		title: 'Add Item'
 	});
 	// Load html into window
 	addWindow.loadFile('src/addWindow.html');
+
+	addWindow.once('ready-to-show', () => {
+		addWindow.show();
+	});
 
 	// Garbage collection handle
 	addWindow.on('closed', function() {
@@ -60,12 +71,18 @@ function createEditWindow(item) {
 		webPreferences: {
 			nodeIntegration: true
 		},
+		backgroundColor: '#fff',
+		frame: false,
 		width: 500,
 		height: 400,
 		title: 'Edit Item'
 	});
 	// Load html into window
 	editWindow.loadFile('src/editWindow.html');
+
+	editWindow.once('ready-to-show', () => {
+		editWindow.show();
+	});
 
 	// Send data to form
 	editWindow.webContents.on('dom-ready', () => {
@@ -85,12 +102,17 @@ function createNewLibraryWindow() {
 		webPreferences: {
 			nodeIntegration: true
 		},
+		backgroundColor: '#fff',
 		width: 500,
 		height: 400,
 		title: 'New Library'
 	});
 	// Load html into window
 	newLibraryWindow.loadFile('src/newLibraryWindow.html');
+
+	newLibraryWindow.once('ready-to-show', () => {
+		newLibraryWindow.show();
+	});
 
 	// Garbage collection handle
 	newLibraryWindow.on('closed', function() {
@@ -141,18 +163,32 @@ ipcMain.on('table:load', function(e) {
 });
 
 ipcMain.on('addWindow:open', function(e) {
-	createAddWindow();
+	if (addWindow == null && editWindow == null) {
+		createAddWindow();
+	}
+});
+
+ipcMain.on('addWindow:close', function(e) {
+	addWindow.close();
 });
 
 ipcMain.on('editWindow:open', function(e, tag) {
-	let item = store.get(tag);
-	createEditWindow(item);
-	deleteItem(tag);
+	if (addWindow == null && editWindow == null) {
+		let item = store.get(tag);
+		createEditWindow(item);
+		deleteItem(tag);
+	}
 });
 
 ipcMain.on('editWindow:close', function(e) {
 	updateTable();
 	editWindow.close();
+});
+
+ipcMain.on('library:new', function(e, item) {
+	store.set('library', item);
+	newLibraryWindow.close();
+	mainWindow.reload();
 });
 
 app.on('ready', createMainWindow);
@@ -181,6 +217,10 @@ const mainMenuTemplate = [
 				click() {
 					createNewLibraryWindow();
 				}
+			},
+			{
+				label: 'Clear Items',
+				click() {}
 			},
 			{
 				label: 'Update Items',
