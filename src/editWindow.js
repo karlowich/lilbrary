@@ -39,8 +39,7 @@ function createLabel(column) {
 	this[column] = document.createElement('label');
 	this[column].className = 'active';
 	this[column].for = column;
-	// make sure first letter is capital
-	this[column].append(column.charAt(0).toUpperCase() + column.slice(1));
+	this[column].append(column);
 	return this[column];
 }
 

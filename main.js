@@ -39,16 +39,15 @@ function createMainWindow() {
 }
 
 // Handle create add window
-function createAddWindow() {
+function createAddWindow(height) {
 	// Create new window
 	addWindow = new BrowserWindow({
 		webPreferences: {
 			nodeIntegration: true
 		},
 		backgroundColor: '#fff',
-		frame: false,
 		width: 500,
-		height: 400,
+		height: height,
 		title: 'Add Item'
 	});
 	// Load html into window
@@ -65,16 +64,15 @@ function createAddWindow() {
 }
 
 // Handle create edit window
-function createEditWindow(item) {
+function createEditWindow(height, item) {
 	// Create new window
 	editWindow = new BrowserWindow({
 		webPreferences: {
 			nodeIntegration: true
 		},
 		backgroundColor: '#fff',
-		frame: false,
 		width: 500,
-		height: 400,
+		height: height,
 		title: 'Edit Item'
 	});
 	// Load html into window
@@ -164,7 +162,12 @@ ipcMain.on('table:load', function(e) {
 
 ipcMain.on('addWindow:open', function(e) {
 	if (addWindow == null && editWindow == null) {
-		createAddWindow();
+		let library = store.get('library');
+		let windowHeight = 400;
+		for (i = 4; i < library.columns.length; i++) {
+			windowHeight += 100;
+		}
+		createAddWindow(windowHeight);
 	}
 });
 
@@ -174,8 +177,13 @@ ipcMain.on('addWindow:close', function(e) {
 
 ipcMain.on('editWindow:open', function(e, tag) {
 	if (addWindow == null && editWindow == null) {
+		let library = store.get('library');
+		let windowHeight = 400;
+		for (i = 4; i < library.columns.length; i++) {
+			windowHeight += 100;
+		}
 		let item = store.get(tag);
-		createEditWindow(item);
+		createEditWindow(windowHeight, item);
 		deleteItem(tag);
 	}
 });

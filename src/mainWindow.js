@@ -35,8 +35,7 @@ function createTh(column, index) {
 	this[column].className = 'table-header';
 	// add sort function to each header
 	this[column].setAttribute('onclick', `sortTable(${index})`);
-	// make sure first letter is capital
-	this[column].append(column.charAt(0).toUpperCase() + column.slice(1));
+	this[column].append(column);
 	return this[column];
 }
 
