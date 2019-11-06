@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, ipcMain } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron');
 const Store = require('electron-store');
 //set filename
 const store = new Store({ name: 'data' });
@@ -195,6 +195,7 @@ ipcMain.on('editWindow:close', function(e) {
 
 ipcMain.on('library:new', function(e, item) {
 	store.set('library', item);
+	clearItems();
 	newLibraryWindow.close();
 	mainWindow.reload();
 });
@@ -223,17 +224,21 @@ const mainMenuTemplate = [
 			{
 				label: 'New Library',
 				click() {
-					createNewLibraryWindow();
-				}
-			},
-			{
-				label: 'Clear Items',
-				click() {}
-			},
-			{
-				label: 'Update Items',
-				click() {
-					updateTable();
+					dialog.showMessageBox(
+						mainWindow,
+						{
+							type: 'question',
+							buttons: ['No', 'Yes'],
+							noLink: true,
+							defaultId: 0,
+							message: 'Do you really want to overwrite the library?'
+						},
+						response => {
+							if (response === 1) {
+								createNewLibraryWindow();
+							}
+						}
+					);
 				}
 			},
 			{ type: 'separator' },
@@ -285,6 +290,15 @@ function updateTable() {
 		item = store.get(tags[i]);
 		mainWindow.webContents.send('table:update', item);
 	}
+}
+
+function clearItems() {
+	let itemTags = store.get('tags');
+	for (let i = 0; i <= itemTags.length; i++) {
+		store.delete(itemTags[i]);
+	}
+	itemTags = [];
+	store.set('tags', itemTags);
 }
 
 function deleteItem(tag) {
