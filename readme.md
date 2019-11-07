@@ -1,2 +1,3 @@
-# Sheet Music
-This is an app for cataloging sheet music
+# LilBrary
+
+This is a library app
