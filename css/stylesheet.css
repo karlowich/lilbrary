@@ -1,3 +1,9 @@
+img {
+	float: left;
+	width: 64px;
+	height: 64px;
+}
+
 /* make table scrollable */
 #scrolltable {
 	margin-top: 10px;

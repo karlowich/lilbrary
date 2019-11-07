@@ -4,7 +4,7 @@ const Store = require('electron-store');
 const store = new Store({ name: 'data' });
 
 // SET ENV
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'dev';
 
 // Keep a global reference of the window object
 let mainWindow;
@@ -294,11 +294,13 @@ function updateTable() {
 
 function clearItems() {
 	let itemTags = store.get('tags');
-	for (let i = 0; i <= itemTags.length; i++) {
-		store.delete(itemTags[i]);
+	if (itemTags != null) {
+		for (let i = 0; i <= itemTags.length; i++) {
+			store.delete(itemTags[i]);
+		}
+		itemTags = [];
+		store.set('tags', itemTags);
 	}
-	itemTags = [];
-	store.set('tags', itemTags);
 }
 
 function deleteItem(tag) {

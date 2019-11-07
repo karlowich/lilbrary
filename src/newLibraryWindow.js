@@ -17,6 +17,8 @@ function createColumnInput() {
 	// focus new input
 	const newColumnInput = document.querySelector(`#column${numberOfColumns}`);
 	newColumnInput.focus();
+	const buttons = document.querySelector('.btn');
+	buttons.scrollIntoView();
 }
 
 function removeColumnInput() {
