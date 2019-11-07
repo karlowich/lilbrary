@@ -44,6 +44,14 @@ function createSpan() {
 
 function submitForm(e) {
 	e.preventDefault();
+	if (numberOfColumns < 2) {
+		const div = document.querySelector('#intersection');
+		const error = document.createElement('span');
+		error.append('You must have atleast 2 columns');
+		error.id = 'error';
+		div.appendChild(error);
+		return false;
+	}
 	const item = {
 		title: document.querySelector(`#library-title`).value,
 		columns: []
