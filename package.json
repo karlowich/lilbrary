@@ -1,15 +1,20 @@
 {
 	"name": "lilbrary",
+	"productName": "LilBrary",
 	"version": "1.0.0",
 	"description": "Library app",
 	"main": "main.js",
 	"scripts": {
-		"start": "electron ."
+		"start": "electron .",
+		"package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+		"package-win": "electron-packager . Lilbrary --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"LilBrary\"",
+		"package-linux": "electron-packager . Lilbrary --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=release-builds"
 	},
 	"author": "Karl Bonde Torp",
 	"license": "MIT",
 	"devDependencies": {
-		"electron": "6.0.12"
+		"electron": "6.0.12",
+		"electron-packager": "^14.1.0"
 	},
 	"dependencies": {
 		"electron-store": "^5.0.0"

@@ -4,7 +4,7 @@ const Store = require('electron-store');
 const store = new Store({ name: 'data' });
 
 // SET ENV
-process.env.NODE_ENV = 'dev';
+process.env.NODE_ENV = 'production';
 
 // Keep a global reference of the window object
 let mainWindow;
