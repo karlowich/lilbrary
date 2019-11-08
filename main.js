@@ -1,10 +1,10 @@
 const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron');
 const Store = require('electron-store');
 //set filename
-const store = new Store({ name: 'data' });
+const store = new Store({ name: 'library' });
 
 // SET ENV
-process.env.NODE_ENV = 'dev';
+process.env.NODE_ENV = 'production';
 
 // Keep a global reference of the window object
 let mainWindow;
