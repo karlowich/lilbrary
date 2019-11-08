@@ -1,7 +1,7 @@
 const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron');
 const Store = require('electron-store');
 //set filename
-const store = new Store({ name: 'library' });
+const store = new Store({ name: 'data' });
 
 // SET ENV
 process.env.NODE_ENV = 'production';
