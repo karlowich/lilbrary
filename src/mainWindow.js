@@ -62,7 +62,17 @@ ipcRenderer.on('table:clear', function() {
 });
 
 function openAddWindow() {
-	ipcRenderer.send('addWindow:open');
+	let row = document.querySelector('.selected');
+	let tag;
+	if (row != null) {
+		tag = `${row.querySelector(`.${libraryColumns[0]}`).innerHTML} ${
+			row.querySelector(`.${libraryColumns[1]}`).innerHTML
+		}`;
+	} else {
+		tag = null;
+	}
+
+	ipcRenderer.send('addWindow:open', tag);
 }
 
 function openEditWindow() {

@@ -47,9 +47,17 @@ function createInput(column, autofocus) {
 	this[column].id = column;
 	this[column].type = 'text';
 	this[column].required = true;
+	this[column].placeholder = '';
 	this[column].autofocus = autofocus;
 	return this[column];
 }
+
+ipcRenderer.on('form:fill', function(e, item) {
+	for (let i = 0; i < libraryColumns.length; i++) {
+		document.querySelector(`#${libraryColumns[i]}`).value =
+			item[libraryColumns[i]];
+	}
+});
 
 function submitForm(e) {
 	e.preventDefault();

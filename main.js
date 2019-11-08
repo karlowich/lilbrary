@@ -4,7 +4,7 @@ const Store = require('electron-store');
 const store = new Store({ name: 'data' });
 
 // SET ENV
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'dev';
 
 // Keep a global reference of the window object
 let mainWindow;
@@ -39,7 +39,7 @@ function createMainWindow() {
 }
 
 // Handle create add window
-function createAddWindow(height) {
+function createAddWindow(height, item) {
 	// Create new window
 	addWindow = new BrowserWindow({
 		webPreferences: {
@@ -55,6 +55,11 @@ function createAddWindow(height) {
 
 	addWindow.once('ready-to-show', () => {
 		addWindow.show();
+	});
+
+	// Send data to form
+	addWindow.webContents.on('dom-ready', () => {
+		addWindow.webContents.send('form:fill', item);
 	});
 
 	// Garbage collection handle
@@ -84,7 +89,7 @@ function createEditWindow(height, item) {
 
 	// Send data to form
 	editWindow.webContents.on('dom-ready', () => {
-		editWindow.webContents.send('item:edit', item);
+		editWindow.webContents.send('form:fill', item);
 	});
 
 	// Garbage collection handle
@@ -160,14 +165,19 @@ ipcMain.on('table:load', function(e) {
 	}
 });
 
-ipcMain.on('addWindow:open', function(e) {
+ipcMain.on('addWindow:open', function(e, tag) {
 	if (addWindow == null && editWindow == null) {
 		let library = store.get('library');
 		let windowHeight = 400;
 		for (i = 4; i < library.columns.length; i++) {
 			windowHeight += 100;
 		}
-		createAddWindow(windowHeight);
+		if (tag != null) {
+			let item = store.get(tag);
+			createAddWindow(windowHeight, item);
+		} else {
+			createAddWindow(windowHeight);
+		}
 	}
 });
 

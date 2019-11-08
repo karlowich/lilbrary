@@ -54,7 +54,7 @@ function createInput(column, autofocus) {
 }
 
 // Fill form with data
-ipcRenderer.on('item:edit', function(e, item) {
+ipcRenderer.on('form:fill', function(e, item) {
 	for (let i = 0; i < libraryColumns.length; i++) {
 		document.querySelector(`#${libraryColumns[i]}`).value =
 			item[libraryColumns[i]];
