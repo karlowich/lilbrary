@@ -33,14 +33,14 @@ function createInput(column) {
 	this[column].id = column;
 	this[column].type = 'text';
 	this[column].required = true;
-	this[column].pattern = '[a-zA-Z0-9-]+';
+	this[column].pattern = "[^' ']+";
 	return this[column];
 }
 
 function createSpan() {
 	span = document.createElement('span');
 	span.className = 'helper-text';
-	span.setAttribute('data-error', 'Please only enter letters or numbers');
+	span.setAttribute('data-error', 'No spaces allowed');
 	return span;
 }
 
