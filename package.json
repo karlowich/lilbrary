@@ -6,9 +6,9 @@
 	"main": "main.js",
 	"scripts": {
 		"start": "electron .",
-		"package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
-		"package-win": "electron-packager . Lilbrary --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"LilBrary\"",
-		"package-linux": "electron-packager . Lilbrary --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=release-builds"
+		"package-mac": "electron-packager . --overwrite --asar --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds --app-copyright=LilBrary2019",
+		"package-win": "electron-packager . --overwrite --asar --platform=win32 --arch=x64 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --app-copyright=LilBrary2019",
+		"package-linux": "electron-packager . --overwrite --asar --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=release-builds --app-copyright=LilBrary2019"
 	},
 	"author": "Karl Bonde Torp",
 	"license": "MIT",
