@@ -241,7 +241,8 @@ const mainMenuTemplate = [
               buttons: ["No", "Yes"],
               noLink: true,
               defaultId: 0,
-              message: "Do you really want to overwrite the library?"
+              message: "Do you really want to overwrite the library?",
+              icon: "assets/icons/icon.png"
             },
             response => {
               if (response === 1) {
