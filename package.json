@@ -1,34 +1,34 @@
 {
-	"name": "lilbrary",
-	"productName": "LilBrary",
-	"version": "1.0.0",
-	"description": "Library app",
-	"main": "main.js",
-	"scripts": {
-		"start": "electron .",
-		"pack": "electron-builder --dir",
-		"dist": "electron-builder"
-	},
-	"author": "Karl Bonde Torp",
-	"license": "MIT",
-	"devDependencies": {
-		"electron": "6.0.12",
-		"electron-builder": "^22.1.0"
-	},
-	"dependencies": {
-		"electron-store": "^5.0.0"
-	},
-	"build": {
-		"appId": "com.lilbrary.app",
-		"productName": "LilBrary",
-		"mac": {
-			"category": "public.app-category.productivity",
-			"icon": "assets/icons/icon.icns",
-			"target": "dmg"
-		},
-		"win": {
-			"icon": "assets/icons/icon.ico",
-			"target": "nsis"
-		}
-	}
+  "name": "lilbrary",
+  "productName": "LilBrary",
+  "version": "1.0.1",
+  "description": "Library app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "author": "Karl Bonde Torp",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "6.0.12",
+    "electron-builder": "^22.1.0"
+  },
+  "dependencies": {
+    "electron-store": "^5.0.0"
+  },
+  "build": {
+    "appId": "com.lilbrary.app",
+    "productName": "LilBrary",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "assets/icons/icon.icns",
+      "target": "dmg"
+    },
+    "win": {
+      "icon": "assets/icons/icon.ico",
+      "target": "nsis"
+    }
+  }
 }
