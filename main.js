@@ -222,8 +222,8 @@ app.on("window-all-closed", () => {
 app.on("activate", () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (win === null) {
-    createWindow();
+  if (mainWindow === null) {
+    createMainWindow();
   }
 });
 
@@ -242,7 +242,7 @@ const mainMenuTemplate = [
               noLink: true,
               defaultId: 0,
               message: "Do you really want to overwrite the library?",
-              icon: "assets/icons/icon.png"
+              icon: null
             },
             response => {
               if (response === 1) {
