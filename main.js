@@ -207,7 +207,9 @@ ipcMain.on("library:new", function(e, item) {
   store.set("library", item);
   clearItems();
   newLibraryWindow.close();
-  mainWindow.reload();
+  if (mainWindow != null) {
+    mainWindow.reload();
+  }
 });
 
 app.on("ready", createMainWindow);
@@ -234,21 +236,25 @@ const mainMenuTemplate = [
       {
         label: "New Library",
         click() {
-          dialog.showMessageBox(
-            mainWindow,
-            {
-              type: "question",
-              buttons: ["No", "Yes"],
-              noLink: true,
-              defaultId: 0,
-              message: "Do you really want to overwrite the library?"
-            },
-            response => {
-              if (response === 1) {
-                createNewLibraryWindow();
+          if (store.get("library") != null) {
+            dialog.showMessageBox(
+              mainWindow,
+              {
+                type: "question",
+                buttons: ["No", "Yes"],
+                noLink: true,
+                defaultId: 0,
+                message: "Do you really want to overwrite the library?"
+              },
+              response => {
+                if (response === 1) {
+                  createNewLibraryWindow();
+                }
               }
-            }
-          );
+            );
+          } else {
+            createNewLibraryWindow();
+          }
         }
       },
       { type: "separator" },
