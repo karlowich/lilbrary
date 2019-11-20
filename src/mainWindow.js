@@ -46,7 +46,7 @@ ipcRenderer.on('table:update', function(e, item) {
 		tr.appendChild(createTd(libraryColumns[i], item));
 	}
 	tbody.append(tr);
-	sortTable(0);
+	sortTable(0, true);
 });
 
 function createTd(column, item) {
@@ -84,7 +84,7 @@ function openEditWindow() {
 }
 
 //from w3school
-function sortTable(n) {
+function sortTable(n, alwaysAsc) {
 	let table, rows, switching, i, x, y, shouldSwitch, dir;
 	let switchcount = 0;
 	table = document.getElementById('mainTable');
@@ -117,9 +117,11 @@ function sortTable(n) {
 			switching = true;
 			switchcount++;
 		} else {
-			if (switchcount == 0 && dir == 'asc') {
-				dir = 'desc';
-				switching = true;
+			if (alwaysAsc != true) {
+				if (switchcount == 0 && dir == 'asc') {
+					dir = 'desc';
+					switching = true;
+				}
 			}
 		}
 	}
